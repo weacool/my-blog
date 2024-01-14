@@ -8,7 +8,7 @@
 .buttoncss3 {
   position: absolute;
   top: 20px;
-  right:700px;
+  right:600px;
   padding: 0px;
   font-size: 40px;
   color: #000000;
@@ -20,7 +20,7 @@
 .buttoncss1 {
   position: absolute;
   top: 20px;
-  right: 510px;
+  right: 450px;
   padding: 0px;
   font-size: 40px;
   color: #000000;
@@ -32,7 +32,7 @@
 .buttoncss2 {
   position: absolute;
   top: 20px;
-  right: 300px;
+  right: 260px;
   padding: 0px;
   font-size: 40px;
   color: #000000;

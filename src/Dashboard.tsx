@@ -29,7 +29,7 @@ function MyButtonHome()  {
 function MyButtonPortfolio()  {
 
   return (
-      <Link to="/Portfolio">
+      <Link to="/portfolio">
       <button 
       className = "buttoncss2"
       >
@@ -41,7 +41,7 @@ function MyButtonPortfolio()  {
 
 const Dashboard = () => {
   return (
-    <>
+    <div>
       <nav>
         
             <Link to="/">
@@ -52,14 +52,14 @@ const Dashboard = () => {
               <MyButtonAbout />
             </Link>
 
-            <Link to="/Portfolio">
+            <Link to="/portfolio">
               <MyButtonPortfolio />
             </Link>
 
       </nav>
 
       <Outlet />
-    </>
+    </div>
   )
 };
 

@@ -7,6 +7,7 @@ import Dashboard from './Dashboard.tsx';
 
 
 
+
 function App() {
 
   return (
@@ -17,13 +18,12 @@ function App() {
       <Dashboard />
       <Routes>
           <Route index element={<HomePage />} />
-          <Route path="About" element={<About />} />
-          <Route path="Portfolio" element={<Portfolio />} />
+          <Route path="about" element={<About />} />
+          <Route path="portfolio/*" element={<Portfolio />} />
       </Routes>
     </BrowserRouter>
+    <img src = {'test.jpg'} />
 
-
-      
     </div>
   )
 }

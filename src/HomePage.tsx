@@ -13,8 +13,6 @@ const HomePage = () => {
         <p>
         Cooking up something so that my career has a future yay
         </p>
-  
-        
       </div>
     );
 
