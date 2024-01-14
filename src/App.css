@@ -1,0 +1,44 @@
+.logo {
+  height: 6em;
+  padding: 1.5em;
+  will-change: filter;
+  transition: filter 300ms;
+}
+
+.buttoncss1 {
+  position: absolute;
+  top: 20px;
+  right: 300px;
+  padding: 0px;
+  font-size: 40px;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.title {
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 70px;
+  color: rgb(0, 0, 0);
+  opacity: 1;
+
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-image: url(../src/background.jpg); /* Set the path to your image */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100vh; /* Ensure the body covers the entire viewport */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide content that overflows */
+}
