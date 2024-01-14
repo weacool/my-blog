@@ -5,7 +5,31 @@
   transition: filter 300ms;
 }
 
+.buttoncss3 {
+  position: absolute;
+  top: 20px;
+  right:700px;
+  padding: 0px;
+  font-size: 40px;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
 .buttoncss1 {
+  position: absolute;
+  top: 20px;
+  right: 510px;
+  padding: 0px;
+  font-size: 40px;
+  color: #000000;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.buttoncss2 {
   position: absolute;
   top: 20px;
   right: 300px;
