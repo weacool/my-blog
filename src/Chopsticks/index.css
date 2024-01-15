@@ -1,0 +1,16 @@
+.finger {
+    width: 60px; /* Adjust the width as needed */
+    height: auto;
+};
+
+
+.image-container {
+    display: flex;
+    /* Other styles for the container itself */
+  }
+
+.image-container img {
+    width: 100px; /* Adjust the width as needed */
+    height: auto; /* Maintain the aspect ratio */
+    margin-right: 10px; /* Adjust the spacing between images */
+  }

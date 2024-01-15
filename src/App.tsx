@@ -22,7 +22,6 @@ function App() {
           <Route path="portfolio/*" element={<Portfolio />} />
       </Routes>
     </BrowserRouter>
-    <img src = {'test.jpg'} />
 
     </div>
   )

@@ -56,7 +56,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-image: url(../src/background.jpg); /* Set the path to your image */
+  background-image: url(./background.jpg); /* Set the path to your image */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
