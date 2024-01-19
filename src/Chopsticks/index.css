@@ -1,16 +1,17 @@
 .finger {
     width: 60px; /* Adjust the width as needed */
     height: auto;
-};
+}
 
 
-.image-container {
+.image-container1 {
     display: flex;
+    height: 300px;
     /* Other styles for the container itself */
-  }
+}
 
-.image-container img {
-    width: 100px; /* Adjust the width as needed */
-    height: auto; /* Maintain the aspect ratio */
-    margin-right: 10px; /* Adjust the spacing between images */
-  }
+.image-container1 img {
+    margin: 20px
+
+}
+
