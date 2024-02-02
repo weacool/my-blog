@@ -1,181 +1,160 @@
-import './index.css'
-import React, { useState } from 'react';
-
-
-interface PlayerState {
-    player: number;
-    hand1: number;
-    hand2: number;
-    turn: boolean;
-    myHand: number;
-
-}
-
-interface PlayerProps {
-    stateholder: PlayerState;
-    myHandUpdate: (myHand: number, player: number) => void;
-    targetHandUpdate: (targetHand: number, player: number) => void;
-}
+import "./index.css";
+import React, { useState, useEffect } from "react";
+import "./interface.tsx";
+import Player from "./Player.tsx";
 
 const Chopsticks: React.FC = () => {
+  const [stateholder, setState] = useState<PlayerState[]>([
+    {
+      player: 1,
+      hand1: 1,
+      hand2: 1,
+      turn: true,
+      myHand: null,
+      isButtonClicked1: false,
+      isButtonClicked2: false,
+      switchCombo: [[1, 1]],
+    },
+    {
+      player: 2,
+      hand1: 1,
+      hand2: 1,
+      turn: false,
+      myHand: null,
+      isButtonClicked1: false,
+      isButtonClicked2: false,
+      switchCombo: [[1, 1]],
+    },
+  ]);
 
-    const [stateholder, setState] = useState<PlayerState[]>([
-      { player: 1, hand1: 2, hand2: 3, turn: true, myHand: 1},
-      { player: 2, hand1: 2, hand2: 1, turn: false, myHand: 1}
-    ]);
-    
+  const updateSwitchHand = (switchValue: number[], player: number) => {
+    let hand1 = switchValue[0];
+    let hand2 = switchValue[1];
 
-    const chooseHand = (myHand: number, player: number) => {
-        setState((prevState) =>
-    prevState.map((playerState) =>
-      playerState.player === player
-        ? { ...playerState, myHand: myHand }
-        : playerState
-    )
-  );
-
-    };
-
-    const slapHand = (targetHand: number, player: number) => {
-        setState((prevState) =>
-          prevState.map((playerState) => {
-            if (playerState.player !== player) {
-              const otherPlayer = prevState.find((p) => p.player === player);
-      
-              let tempHand1;
-
-              if (otherPlayer!.myHand === 1 && otherPlayer) {
-                tempHand1 = otherPlayer.hand1;
-              } else if (otherPlayer!.myHand === 2 && otherPlayer) {
-                tempHand1 = otherPlayer.hand2;
-              }
-              console.log('otherplayer1', otherPlayer!.hand1);
-              console.log('otherplayer2', otherPlayer!.hand2);
-              console.log('tempHand1', tempHand1)
-              if (targetHand === 1) {
-                return {
-                  ...playerState,
-                  hand1: playerState.hand1 + tempHand1!,
-                  turn: true
-                };
-              } else if (targetHand === 2) {
-                return {
-                    ...playerState,
-                    hand2: playerState.hand2 + tempHand1!,
-                    turn: true
-                  };
-              }
+    setState((prevState) =>
+      prevState.map((playerState) =>
+        playerState.player === player
+          ? {
+              ...playerState,
+              hand1: hand1,
+              hand2: hand2,
+              turn: false,
+              myHand: null,
+              isButtonClicked1: false,
+              isButtonClicked2: false,
             }
-      
-            return playerState;
-          })
-        );
-      };
-
-      React.useEffect(() => {
-        console.log(stateholder); // Log the updated state
-      }, [stateholder]);
-
-    
-  
-      
-  
-      return (
-          <div>
-            
-            <h1>player 1</h1>
-             <Player stateholder = {stateholder[0]} myHandUpdate = {chooseHand} targetHandUpdate = {slapHand}/>
-             <h1>player 2</h1>
-             <Player stateholder = {stateholder[1]} myHandUpdate = {chooseHand} targetHandUpdate = {slapHand}/>
-          </div>
-        
-      );
-  
-      
-  
+          : { ...playerState, turn: true }
+      )
+    );
   };
 
-
-const Player: React.FC<PlayerProps> = ({stateholder, myHandUpdate, targetHandUpdate}) => {
-    const player = stateholder;
-
-    const handleMyHandClick = (myHand: number) => {
-
-        myHandUpdate(myHand, player.player);
-
-      };
-
-    const handleTargetHandClick = (targetHand: number) => {
-
-        targetHandUpdate(targetHand, player.player)
+  useEffect(() => {
+    if (stateholder[0].hand1 === 0 && stateholder[0].hand2 === 0) {
+      window.alert("player2 Won");
     }
-  
-    return (
-        <div>
-            {player.turn ? (
-                <div>
-                <p>my turn</p>
-                <button onClick = {() => handleMyHandClick(1)}>
-                myHand
-                </button>
-                <button onClick = {() => handleMyHandClick(2)}>
-                myHand2
-            </button>
-            <button onClick = {() => handleTargetHandClick(1)}>
-                targetHand1
-            </button>
-            <button onClick = {() => handleTargetHandClick(2)}>
-                targetHand2
-            </button>
+    if (stateholder[1].hand1 === 0 && stateholder[1].hand2 === 0) {
+      window.alert("player1 Won");
+    }
+  }, [stateholder[0].turn]);
 
-                </div>
-            ):<></>}
-
-            <div className = 'image-container1'>
-                <Hand handProp = {player.hand1}/>
-                <Hand handProp = {player.hand2}/>
-            </div>
-        </div>
-         
-        
+  const updateSwitchCombo = (
+    switchCombo: [number, number][],
+    player: number
+  ) => {
+    setState((prevState) =>
+      prevState.map((playerState) =>
+        playerState.player === player
+          ? {
+              ...playerState,
+              switchCombo: switchCombo,
+            }
+          : playerState
+      )
     );
-
-      }
-
-
-
-const Hand: React.FC<{ handProp: number }> = ({handProp}) => {
-    
-  const fingerMap: Record<number, string> = {
-    1: '/finger1.png',
-    2: '/finger2.png',
-    3: '/finger3.png',
-    4: '/finger4.png',
-    5: '/finger5.png',
   };
 
-
-    return (
-        <div>
-        <img src = {fingerMap[handProp]} />
-        </div>
-       
-      
+  const chooseHand = (myHand: number, player: number) => {
+    setState((prevState) =>
+      prevState.map((playerState) =>
+        playerState.player === player
+          ? {
+              ...playerState,
+              myHand: myHand,
+              isButtonClicked1: myHand === 1 ? true : false,
+              isButtonClicked2: myHand === 2 ? true : false,
+            }
+          : playerState
+      )
     );
- 
-}
+  };
 
+  const slapHand = (targetHand: number, player: number) => {
+    setState((prevState) =>
+      prevState.map((playerState) => {
+        if (playerState.player !== player) {
+          const otherPlayer = prevState.find((p) => p.player === player);
 
-/*
-const [fingerCount1, setFingerCount1] = useState(1);
-    const [fingerCount2, setFingerCount2] = useState(1);
+          let tempHand1;
 
-        const handleFingerClick = (fingerNumber:  number) => {
-        if (fingerNumber === 1) {
-            setFingerCount1((prevCount) => prevCount + fingerCount2);
-        } else if (fingerNumber === 2) {
-            setFingerCount2((prevCount) => prevCount + fingerCount1);
-    }*/
+          if (otherPlayer!.myHand === 1 && otherPlayer) {
+            tempHand1 = otherPlayer.hand1;
+          } else if (otherPlayer!.myHand === 2 && otherPlayer) {
+            tempHand1 = otherPlayer.hand2;
+          }
+          if (targetHand === 1) {
+            return {
+              ...playerState,
+              hand1:
+                playerState.hand1 + tempHand1! > 5
+                  ? 0
+                  : playerState.hand1 + tempHand1!,
+              turn: true,
+            };
+          } else if (targetHand === 2) {
+            return {
+              ...playerState,
+              hand2:
+                playerState.hand2 + tempHand1! > 5
+                  ? 0
+                  : playerState.hand2 + tempHand1!,
+              turn: true,
+            };
+          }
+        }
 
+        return {
+          ...playerState,
+          turn: false,
+          myHand: null,
+          isButtonClicked1: false,
+          isButtonClicked2: false,
+        };
+      })
+    );
+  };
+
+  return (
+    <div className="layout">
+      <h1 className="player">player 1</h1>
+      <Player
+        stateholder={stateholder[0]}
+        myHandUpdate={chooseHand}
+        targetHandUpdate={slapHand}
+        switchUpdate={updateSwitchCombo}
+        opponentHands={[stateholder[1].hand1, stateholder[1].hand2]}
+        updateSwitchHand={updateSwitchHand}
+      />
+      <h1 className="player">player 2</h1>
+      <Player
+        stateholder={stateholder[1]}
+        myHandUpdate={chooseHand}
+        targetHandUpdate={slapHand}
+        switchUpdate={updateSwitchCombo}
+        opponentHands={[stateholder[0].hand1, stateholder[0].hand2]}
+        updateSwitchHand={updateSwitchHand}
+      />
+    </div>
+  );
+};
 
 export default Chopsticks;

@@ -1,44 +1,51 @@
-import { Routes, Route, Link, Outlet, useNavigate, useLocation  } from 'react-router-dom';
-import Chopsticks from './Chopsticks/Index.tsx';
+import {
+  Routes,
+  Route,
+  Link,
+  Outlet,
+  useNavigate,
+  useLocation,
+} from "react-router-dom";
+import Chopsticks from "./Chopsticks/Index.tsx";
 
 function MyButtonChopSticks() {
-    const navigate = useNavigate();
-    const location = useLocation();
-  
-    const handleClick = () => {
-      navigate('/portfolio/chopsticks');
-    };
+  const navigate = useNavigate();
+  const location = useLocation();
 
-    const isChopsticksRoute = location.pathname === '/portfolio/chopsticks';
+  const handleClick = () => {
+    navigate("/portfolio/chopsticks");
+  };
 
-    return (
-        <div>
-          {!isChopsticksRoute && (
-            <Link to="/portfolio/chopsticks">
-              <button onClick={handleClick}>Chopsticks</button>
-            </Link>
-          )}
-        </div>
-      );
-    }
+  const isChopsticksRoute = location.pathname === "/portfolio/chopsticks";
 
-
+  return (
+    <div>
+      {!isChopsticksRoute && (
+        <Link to="/portfolio/chopsticks">
+          <button onClick={handleClick}>
+            <img className="chopsticks" src="Chopsticks.jpg" />
+          </button>
+          <p>Chopsticks Game</p>
+        </Link>
+      )}
+    </div>
+  );
+}
 
 const Portfolio = () => {
-    return (
-        
-    
+  return (
     <div>
-    <Link to="/">
-        <MyButtonChopSticks />
-    </Link>
-      <Routes>
+      <div>
+        <Link to="/">
+          <MyButtonChopSticks />
+        </Link>
+        <Routes>
           <Route path="chopsticks" element={<Chopsticks />} />
-      </Routes>
-    <Outlet />
+        </Routes>
+        <Outlet />
+      </div>
     </div>
-    );
-
+  );
 };
 
 export default Portfolio;

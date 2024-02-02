@@ -8,7 +8,7 @@
 .buttoncss3 {
   position: absolute;
   top: 20px;
-  right:600px;
+  right: 600px;
   padding: 0px;
   font-size: 40px;
   color: #000000;
@@ -41,7 +41,6 @@
   cursor: pointer;
 }
 
-
 .title {
   position: absolute;
   top: 30%;
@@ -50,7 +49,6 @@
   font-size: 70px;
   color: rgb(0, 0, 0);
   opacity: 1;
-
 }
 
 body {
@@ -65,4 +63,9 @@ body {
   justify-content: center;
   align-items: center;
   overflow: hidden; /* Hide content that overflows */
+}
+
+.chopsticks {
+  width: 200px;
+  height: 200px;
 }

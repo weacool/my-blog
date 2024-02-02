@@ -1,66 +1,41 @@
 import { Outlet, Link } from "react-router-dom";
 
-function MyButtonAbout()  {
-
+function MyButtonAbout() {
   return (
-      <Link to="/About">
-      <button 
-      className = "buttoncss1"
-      >
-          About
-      </button>
-      </Link>
-  )
+    <Link to="/About">
+      <button className="buttoncss1">About</button>
+    </Link>
+  );
 }
 
-function MyButtonHome()  {
-
+function MyButtonHome() {
   return (
-      <Link to="/">
-      <button 
-      className = "buttoncss3"
-      >
-          Home
-      </button>
-      </Link>
-  )
+    <Link to="/">
+      <button className="buttoncss3">Home</button>
+    </Link>
+  );
 }
 
-function MyButtonPortfolio()  {
-
+function MyButtonPortfolio() {
   return (
-      <Link to="/portfolio">
-      <button 
-      className = "buttoncss2"
-      >
-          Portfolio
-      </button>
-      </Link>
-  )
+    <Link to="/portfolio">
+      <button className="buttoncss2">Portfolio</button>
+    </Link>
+  );
 }
 
 const Dashboard = () => {
   return (
     <div>
       <nav>
-        
-            <Link to="/">
-              <MyButtonHome />
-            </Link>
-
-            <Link to="/about">
-              <MyButtonAbout />
-            </Link>
-
-            <Link to="/portfolio">
-              <MyButtonPortfolio />
-            </Link>
-
+        <MyButtonHome />
+        <MyButtonAbout />
+        <MyButtonPortfolio />
       </nav>
 
       <Outlet />
     </div>
-  )
+  );
 };
 
 export default Dashboard;
