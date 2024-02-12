@@ -36,9 +36,7 @@ const Portfolio = () => {
   return (
     <div>
       <div>
-        <Link to="/">
-          <MyButtonChopSticks />
-        </Link>
+        <MyButtonChopSticks />
         <Routes>
           <Route path="chopsticks" element={<Chopsticks />} />
         </Routes>
