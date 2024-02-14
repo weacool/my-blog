@@ -3,6 +3,7 @@ const path = require("path");
 const { Server } = require("socket.io");
 const { createServer } = require("node:http");
 const cors = require("cors");
+const isEqual = require("lodash/isEqual");
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -25,11 +26,41 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist", "index.html"));
 });
 
+let stateholder = [
+  {
+    player: 1,
+    hand1: 1,
+    hand2: 1,
+    turn: true,
+    myHand: null,
+    isButtonClicked1: false,
+    isButtonClicked2: false,
+    switchCombo: [[1, 1]],
+  },
+  {
+    player: 2,
+    hand1: 1,
+    hand2: 1,
+    turn: false,
+    myHand: null,
+    isButtonClicked1: false,
+    isButtonClicked2: false,
+    switchCombo: [[1, 1]],
+  },
+];
+
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  socket.on("sendState", (newState) => {
+    // Update the server-side state with the received state
+    stateholder = newState;
+    //Broadcast the updated state to all connected clients
+    io.emit("updateState", stateholder);
+  });
 });
 
 // Start the server
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });

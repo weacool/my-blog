@@ -2,6 +2,7 @@ import "./index.css";
 import React, { useState, useEffect } from "react";
 import "./interface.tsx";
 import Player from "./Player.tsx";
+import { io, Socket } from "socket.io-client";
 
 const Chopsticks: React.FC = () => {
   const [stateholder, setState] = useState<PlayerState[]>([
@@ -26,13 +27,40 @@ const Chopsticks: React.FC = () => {
       switchCombo: [[1, 1]],
     },
   ]);
+  const [socket, setSocket] = useState<Socket | null>(null);
+
+  useEffect(() => {
+    // Connect to the Socket.IO server
+    const socket = io("http://localhost:5000"); // Replace with your server URL
+    setSocket(socket);
+    // Event handling
+    socket.on("connect", () => {
+      console.log("Connected to server");
+    });
+
+    // Listen for 'updateState' event from the server
+    socket.on("updateState", (updatedState) => {
+      setState(updatedState);
+    });
+
+    socket.on("disconnect", () => {
+      console.log("Disconnected from server");
+    });
+
+    // Clean up the socket connection when the component unmounts
+    return () => {
+      socket.disconnect();
+    };
+  }, []); // Empty dependency array ensures the effect runs once on component mount
+
+  //socket.emit("sendState", stateholder);
 
   const updateSwitchHand = (switchValue: number[], player: number) => {
     let hand1 = switchValue[0];
     let hand2 = switchValue[1];
 
-    setState((prevState) =>
-      prevState.map((playerState) =>
+    setState((prevState) => {
+      const newState = prevState.map((playerState) =>
         playerState.player === player
           ? {
               ...playerState,
@@ -44,8 +72,13 @@ const Chopsticks: React.FC = () => {
               isButtonClicked2: false,
             }
           : { ...playerState, turn: true }
-      )
-    );
+      );
+
+      if (socket) {
+        socket.emit("sendState", newState);
+      }
+      return newState;
+    });
   };
 
   useEffect(() => {
@@ -61,21 +94,28 @@ const Chopsticks: React.FC = () => {
     switchCombo: [number, number][],
     player: number
   ) => {
-    setState((prevState) =>
-      prevState.map((playerState) =>
+    setState((prevState) => {
+      const newState = prevState.map((playerState) =>
         playerState.player === player
           ? {
               ...playerState,
               switchCombo: switchCombo,
             }
           : playerState
-      )
-    );
+      );
+
+      // Emit the updated state to the server if a socket connection exists
+      if (socket) {
+        socket.emit("sendState", newState);
+      }
+
+      return newState;
+    });
   };
 
   const chooseHand = (myHand: number, player: number) => {
-    setState((prevState) =>
-      prevState.map((playerState) =>
+    setState((prevState) => {
+      const newState = prevState.map((playerState) =>
         playerState.player === player
           ? {
               ...playerState,
@@ -84,13 +124,18 @@ const Chopsticks: React.FC = () => {
               isButtonClicked2: myHand === 2 ? true : false,
             }
           : playerState
-      )
-    );
+      );
+      if (socket) {
+        socket.emit("sendState", newState);
+      }
+
+      return newState;
+    });
   };
 
   const slapHand = (targetHand: number, player: number) => {
-    setState((prevState) =>
-      prevState.map((playerState) => {
+    setState((prevState) => {
+      const newState = prevState.map((playerState) => {
         if (playerState.player !== player) {
           const otherPlayer = prevState.find((p) => p.player === player);
 
@@ -101,6 +146,7 @@ const Chopsticks: React.FC = () => {
           } else if (otherPlayer!.myHand === 2 && otherPlayer) {
             tempHand1 = otherPlayer.hand2;
           }
+
           if (targetHand === 1) {
             return {
               ...playerState,
@@ -129,8 +175,15 @@ const Chopsticks: React.FC = () => {
           isButtonClicked1: false,
           isButtonClicked2: false,
         };
-      })
-    );
+      });
+
+      // Emit the updated state to the server
+      if (socket) {
+        socket.emit("sendState", newState);
+      }
+
+      return newState; // Return the updated state for React to apply
+    });
   };
 
   return (
