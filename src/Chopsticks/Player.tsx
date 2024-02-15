@@ -8,6 +8,7 @@ const Player: React.FC<PlayerProps> = ({
   switchUpdate,
   opponentHands,
   updateSwitchHand,
+  playerid,
 }) => {
   const player = stateholder;
 
@@ -71,7 +72,7 @@ const Player: React.FC<PlayerProps> = ({
 
   return (
     <div className="layout2">
-      {player.turn ? (
+      {player.turn && player.player === playerid ? (
         <div>
           <div className="handturncontainer1">
             <h1>My turn</h1>
@@ -118,17 +119,27 @@ const Player: React.FC<PlayerProps> = ({
       ) : (
         <></>
       )}
-
+      {!player.turn && player.player === playerid && (
+        <div>
+          <div className="waiting-text">
+            Waiting for Other Player's turn ...
+          </div>
+        </div>
+      )}
       <div className="image-container1">
         <Hand handProp={player.hand1} />
         <Hand handProp={player.hand2} />
       </div>
       <ul>
         {player.turn &&
+          player.player === playerid &&
           player.switchCombo.map((buttonValues, index) => (
             <li key={index}>
-              <button onClick={() => handleSwitchClick(buttonValues)}>
-                {buttonValues}
+              <button
+                //className="switchbutton"
+                onClick={() => handleSwitchClick(buttonValues)}
+              >
+                {buttonValues[0] + " , " + buttonValues[1]}
               </button>
             </li>
           ))}

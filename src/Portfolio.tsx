@@ -8,24 +8,30 @@ import {
 } from "react-router-dom";
 import Chopsticks from "./Chopsticks/Index.tsx";
 
-function MyButtonChopSticks() {
+interface MyButtonChopSticksProps {
+  id: number;
+}
+
+function MyButtonChopSticks({ id }: MyButtonChopSticksProps) {
   const navigate = useNavigate();
   const location = useLocation();
 
   const handleClick = () => {
-    navigate("/portfolio/chopsticks");
+    navigate(`/portfolio/chopsticks/${id}`);
   };
 
-  const isChopsticksRoute = location.pathname === "/portfolio/chopsticks";
+  const isChopsticksRoute =
+    location.pathname === `/portfolio/chopsticks/1` ||
+    location.pathname === `/portfolio/chopsticks/2`;
 
   return (
     <div>
       {!isChopsticksRoute && (
-        <Link to="/portfolio/chopsticks">
+        <Link to={`/portfolio/chopsticks/${id}`}>
           <button onClick={handleClick}>
-            <img className="chopsticks" src="Chopsticks.jpg" />
+            <img className="chopsticks" src={`Chopsticks.jpg`} />
           </button>
-          <p>Chopsticks Game</p>
+          <p>Chopsticks Game Player {id}</p>
         </Link>
       )}
     </div>
@@ -36,9 +42,11 @@ const Portfolio = () => {
   return (
     <div>
       <div>
-        <MyButtonChopSticks />
+        <MyButtonChopSticks id={1} />
+        <MyButtonChopSticks id={2} />
+        {/* Add more buttons as needed */}
         <Routes>
-          <Route path="chopsticks" element={<Chopsticks />} />
+          <Route path="chopsticks/:id" element={<Chopsticks />} />
         </Routes>
         <Outlet />
       </div>

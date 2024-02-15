@@ -3,8 +3,11 @@ import React, { useState, useEffect } from "react";
 import "./interface.tsx";
 import Player from "./Player.tsx";
 import { io, Socket } from "socket.io-client";
+import { useParams } from "react-router-dom";
 
 const Chopsticks: React.FC = () => {
+  const { id } = useParams<{ id: string }>();
+  const numericId = id ? Number(id) : undefined;
   const [stateholder, setState] = useState<PlayerState[]>([
     {
       player: 1,
@@ -14,7 +17,7 @@ const Chopsticks: React.FC = () => {
       myHand: null,
       isButtonClicked1: false,
       isButtonClicked2: false,
-      switchCombo: [[1, 1]],
+      switchCombo: [],
     },
     {
       player: 2,
@@ -24,9 +27,10 @@ const Chopsticks: React.FC = () => {
       myHand: null,
       isButtonClicked1: false,
       isButtonClicked2: false,
-      switchCombo: [[1, 1]],
+      switchCombo: [],
     },
   ]);
+
   const [socket, setSocket] = useState<Socket | null>(null);
 
   useEffect(() => {
@@ -80,15 +84,6 @@ const Chopsticks: React.FC = () => {
       return newState;
     });
   };
-
-  useEffect(() => {
-    if (stateholder[0].hand1 === 0 && stateholder[0].hand2 === 0) {
-      window.alert("player2 Won");
-    }
-    if (stateholder[1].hand1 === 0 && stateholder[1].hand2 === 0) {
-      window.alert("player1 Won");
-    }
-  }, [stateholder[0].turn]);
 
   const updateSwitchCombo = (
     switchCombo: [number, number][],
@@ -186,8 +181,49 @@ const Chopsticks: React.FC = () => {
     });
   };
 
+  const handleReset = () => {
+    const initalState = [
+      {
+        player: 1,
+        hand1: 1,
+        hand2: 1,
+        turn: true,
+        myHand: null,
+        isButtonClicked1: false,
+        isButtonClicked2: false,
+        switchCombo: [],
+      },
+      {
+        player: 2,
+        hand1: 1,
+        hand2: 1,
+        turn: false,
+        myHand: null,
+        isButtonClicked1: false,
+        isButtonClicked2: false,
+        switchCombo: [],
+      },
+    ];
+    if (socket) {
+      socket.emit("sendState", initalState);
+    }
+  };
+
   return (
     <div className="layout">
+      {stateholder[0].hand1 === 0 && stateholder[0].hand2 === 0 && (
+        <div>
+          <div className="winning-text">player 2 won</div>
+        </div>
+      )}
+      {stateholder[1].hand1 === 0 && stateholder[1].hand2 === 0 && (
+        <div>
+          <div className="winning-text">player 1 won</div>
+        </div>
+      )}
+      <button className="reset-button" onClick={handleReset}>
+        reset
+      </button>
       <h1 className="player">player 1</h1>
       <Player
         stateholder={stateholder[0]}
@@ -196,6 +232,7 @@ const Chopsticks: React.FC = () => {
         switchUpdate={updateSwitchCombo}
         opponentHands={[stateholder[1].hand1, stateholder[1].hand2]}
         updateSwitchHand={updateSwitchHand}
+        playerid={numericId}
       />
       <h1 className="player">player 2</h1>
       <Player
@@ -205,6 +242,7 @@ const Chopsticks: React.FC = () => {
         switchUpdate={updateSwitchCombo}
         opponentHands={[stateholder[0].hand1, stateholder[0].hand2]}
         updateSwitchHand={updateSwitchHand}
+        playerid={numericId}
       />
     </div>
   );

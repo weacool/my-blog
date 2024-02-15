@@ -36,12 +36,11 @@
 
 .layout2 {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 .switchbutton {
-  position: relative;
-  left: 200px;
+  width: 50px;
 }
 
 .round-button {
@@ -70,4 +69,21 @@
 .round-button.highlighted {
   background-color: #ffcc00; /* Adjust the background color for highlighting */
   color: #333; /* Adjust the text color for highlighting */
+}
+
+.reset-button {
+  position: relative;
+  right: 600px;
+  width: 100px;
+}
+
+.waiting-text {
+  margin-left: -400px;
+  margin-bottom: -50px;
+  font-size: 20px;
+}
+
+.winning-text {
+  font-size: 50px;
+  margin-bottom: -50px;
 }

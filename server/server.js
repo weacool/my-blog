@@ -35,7 +35,7 @@ let stateholder = [
     myHand: null,
     isButtonClicked1: false,
     isButtonClicked2: false,
-    switchCombo: [[1, 1]],
+    switchCombo: [],
   },
   {
     player: 2,
@@ -45,12 +45,14 @@ let stateholder = [
     myHand: null,
     isButtonClicked1: false,
     isButtonClicked2: false,
-    switchCombo: [[1, 1]],
+    switchCombo: [],
   },
 ];
 
 io.on("connection", (socket) => {
   console.log("a user connected");
+
+  io.emit("updateState", stateholder);
 
   socket.on("sendState", (newState) => {
     // Update the server-side state with the received state

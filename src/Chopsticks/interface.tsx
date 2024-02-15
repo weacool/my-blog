@@ -6,7 +6,7 @@ interface PlayerState {
   myHand: number | null;
   isButtonClicked1: boolean;
   isButtonClicked2: boolean;
-  switchCombo: [number, number][];
+  switchCombo: [number, number][] | [];
 }
 
 interface PlayerProps {
@@ -16,4 +16,5 @@ interface PlayerProps {
   switchUpdate: (switchCombo: [number, number][], player: number) => void;
   opponentHands: number[];
   updateSwitchHand: (switchValue: number[], player: number) => void;
+  playerid: number | undefined;
 }
