@@ -1,9 +1,12 @@
 import { Outlet, Link } from "react-router-dom";
+import Button from "@mui/material/Button";
 
-function MyButtonAbout() {
+function MyButtonBlog() {
   return (
-    <Link to="/About">
-      <button className="buttoncss1">About</button>
+    <Link to="/Blog">
+      <Button variant="contained" size="large" style={{ marginRight: "40px" }}>
+        Blog
+      </Button>
     </Link>
   );
 }
@@ -11,7 +14,9 @@ function MyButtonAbout() {
 function MyButtonHome() {
   return (
     <Link to="/">
-      <button className="buttoncss3">Home</button>
+      <Button variant="contained" size="large" style={{ marginRight: "40px" }}>
+        Home
+      </Button>
     </Link>
   );
 }
@@ -19,17 +24,19 @@ function MyButtonHome() {
 function MyButtonPortfolio() {
   return (
     <Link to="/portfolio">
-      <button className="buttoncss2">Portfolio</button>
+      <Button variant="contained" size="large" style={{ marginRight: "40px" }}>
+        Portfolio
+      </Button>
     </Link>
   );
 }
 
 const Dashboard = () => {
   return (
-    <div>
+    <div className="dashboard">
       <nav>
         <MyButtonHome />
-        <MyButtonAbout />
+        <MyButtonBlog />
         <MyButtonPortfolio />
       </nav>
 

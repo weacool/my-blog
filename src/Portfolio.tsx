@@ -28,10 +28,12 @@ function MyButtonChopSticks({ id }: MyButtonChopSticksProps) {
     <div>
       {!isChopsticksRoute && (
         <Link to={`/portfolio/chopsticks/${id}`}>
-          <button onClick={handleClick}>
-            <img className="chopsticks" src={`Chopsticks.jpg`} />
-          </button>
-          <p>Chopsticks Game Player {id}</p>
+          <div style={{ padding: "50px" }}>
+            <button onClick={handleClick}>
+              <img className="chopsticks" src={`Chopsticks.jpg`} />
+            </button>
+            <p>Chopsticks Game Player {id}</p>
+          </div>
         </Link>
       )}
     </div>
@@ -41,7 +43,7 @@ function MyButtonChopSticks({ id }: MyButtonChopSticksProps) {
 const Portfolio = () => {
   return (
     <div>
-      <div>
+      <div style={{ display: "flex" }}>
         <MyButtonChopSticks id={1} />
         <MyButtonChopSticks id={2} />
         {/* Add more buttons as needed */}

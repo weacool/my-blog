@@ -1,44 +1,8 @@
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-
-.buttoncss3 {
+.dashboard {
+  display: flex;
   position: absolute;
-  top: 20px;
-  right: 600px;
-  padding: 0px;
-  font-size: 40px;
-  color: #000000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.buttoncss1 {
-  position: absolute;
-  top: 20px;
-  right: 450px;
-  padding: 0px;
-  font-size: 40px;
-  color: #000000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.buttoncss2 {
-  position: absolute;
-  top: 20px;
-  right: 260px;
-  padding: 0px;
-  font-size: 40px;
-  color: #000000;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  top: 5%;
+  left: 70%;
 }
 
 .title {

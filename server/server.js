@@ -1,24 +1,13 @@
 const express = require("express");
 const path = require("path");
-const { Server } = require("socket.io");
-const { createServer } = require("node:http");
 const cors = require("cors");
-const isEqual = require("lodash/isEqual");
-
+const initializeSocketServer = require("./sockets.js");
 const app = express();
 const port = process.env.PORT || 5000;
-const server = createServer(app);
-
-const io = new Server(server, {
-  cors: {
-    origin: "http://localhost:5173",
-    methods: ["GET", "POST"],
-  },
-});
-
+const createBlogServer = require("./database.js");
 app.use(cors({ origin: "http://localhost:5173" }));
+createBlogServer(app);
 
-// Serve static files from the 'build' folder in your React app
 app.use(express.static(path.join(__dirname, "../dist")));
 
 // Define a route to handle all other requests and serve the React app
@@ -26,41 +15,8 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "../dist", "index.html"));
 });
 
-let stateholder = [
-  {
-    player: 1,
-    hand1: 1,
-    hand2: 1,
-    turn: true,
-    myHand: null,
-    isButtonClicked1: false,
-    isButtonClicked2: false,
-    switchCombo: [],
-  },
-  {
-    player: 2,
-    hand1: 1,
-    hand2: 1,
-    turn: false,
-    myHand: null,
-    isButtonClicked1: false,
-    isButtonClicked2: false,
-    switchCombo: [],
-  },
-];
-
-io.on("connection", (socket) => {
-  console.log("a user connected");
-
-  io.emit("updateState", stateholder);
-
-  socket.on("sendState", (newState) => {
-    // Update the server-side state with the received state
-    stateholder = newState;
-    //Broadcast the updated state to all connected clients
-    io.emit("updateState", stateholder);
-  });
-});
+// Initialize the socket server passing the app to it
+const server = initializeSocketServer(app);
 
 // Start the server
 server.listen(port, () => {
