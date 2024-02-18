@@ -1,11 +1,7 @@
 .container {
   display: flex;
   flex-direction: column;
-  margin-left: 600px;
-  margin-right: 600px;
-  margin-bottom: 100px;
-}
-
-.container .item {
-  margin-top: 50px;
+  align-items: center;
+  margin-left: 300px;
+  margin-right: 300px;
 }

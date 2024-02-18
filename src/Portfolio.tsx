@@ -7,6 +7,7 @@ import {
   useLocation,
 } from "react-router-dom";
 import Chopsticks from "./Chopsticks/Index.tsx";
+import Typography from "@mui/material/Typography";
 
 interface MyButtonChopSticksProps {
   id: number;
@@ -27,14 +28,16 @@ function MyButtonChopSticks({ id }: MyButtonChopSticksProps) {
   return (
     <div>
       {!isChopsticksRoute && (
-        <Link to={`/portfolio/chopsticks/${id}`}>
-          <div style={{ padding: "50px" }}>
-            <button onClick={handleClick}>
-              <img className="chopsticks" src={`Chopsticks.jpg`} />
-            </button>
-            <p>Chopsticks Game Player {id}</p>
-          </div>
-        </Link>
+        <div className="containermargin">
+          <Link to={`/portfolio/chopsticks/${id}`}>
+            <div>
+              <button onClick={handleClick}>
+                <img className="chopsticks" src={`Chopsticks.jpg`} />
+              </button>
+            </div>
+          </Link>
+          <Typography variant="body1">Player {id}</Typography>
+        </div>
       )}
     </div>
   );
@@ -43,10 +46,21 @@ function MyButtonChopSticks({ id }: MyButtonChopSticksProps) {
 const Portfolio = () => {
   return (
     <div>
-      <div style={{ display: "flex" }}>
-        <MyButtonChopSticks id={1} />
-        <MyButtonChopSticks id={2} />
-        {/* Add more buttons as needed */}
+      <div className="container3">
+        <Typography variant="h3" sx={{ marginTop: "100px" }}>
+          Chopstick Game
+        </Typography>
+        <Typography variant="body1" sx={{ marginTop: "50px" }}>
+          A fast and short game that's built using socket.io for websocketing
+          and passing state to the server and back to the other clients. To
+          begin, click on whichever player you wish to be and have a friend to
+          be the other player. From there you'll see the rules on how to play.
+        </Typography>
+        <div className="container2">
+          <MyButtonChopSticks id={1} />
+          <MyButtonChopSticks id={2} />
+        </div>
+
         <Routes>
           <Route path="chopsticks/:id" element={<Chopsticks />} />
         </Routes>

@@ -4,6 +4,9 @@ import "./interface.tsx";
 import Player from "./Player.tsx";
 import { io, Socket } from "socket.io-client";
 import { useParams } from "react-router-dom";
+import Button from "@mui/material/Button";
+import styled from "@emotion/styled";
+import Typography from "@mui/material/Typography";
 
 const Chopsticks: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -209,22 +212,39 @@ const Chopsticks: React.FC = () => {
     }
   };
 
+  const StyledButton = styled(Button)`
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: rgba(110, 5, 5, 0.7);
+    }
+  `;
+
   return (
     <div className="layout">
-      {stateholder[0].hand1 === 0 && stateholder[0].hand2 === 0 && (
-        <div>
-          <div className="winning-text">player 2 won</div>
-        </div>
-      )}
-      {stateholder[1].hand1 === 0 && stateholder[1].hand2 === 0 && (
-        <div>
-          <div className="winning-text">player 1 won</div>
-        </div>
-      )}
-      <button className="reset-button" onClick={handleReset}>
+      <Typography variant="body1">
+        {stateholder[0].hand1 === 0 && stateholder[0].hand2 === 0 && (
+          <div>
+            <div className="winning-text">player 2 won</div>
+          </div>
+        )}
+        {stateholder[1].hand1 === 0 && stateholder[1].hand2 === 0 && (
+          <div>
+            <div className="winning-text">player 1 won</div>
+          </div>
+        )}
+      </Typography>
+      <StyledButton
+        variant="contained"
+        className="reset-button"
+        sx={{ backgroundColor: "rgb(110, 5, 5)" }}
+        onClick={handleReset}
+      >
         reset
-      </button>
-      <h1 className="player">player 1</h1>
+      </StyledButton>
+      <div className="player">
+        <Typography variant="h3">player 1</Typography>
+      </div>
       <Player
         stateholder={stateholder[0]}
         myHandUpdate={chooseHand}
@@ -234,7 +254,9 @@ const Chopsticks: React.FC = () => {
         updateSwitchHand={updateSwitchHand}
         playerid={numericId}
       />
-      <h1 className="player">player 2</h1>
+      <div className="player2">
+        <Typography variant="h3">player 2</Typography>
+      </div>
       <Player
         stateholder={stateholder[1]}
         myHandUpdate={chooseHand}
@@ -244,6 +266,17 @@ const Chopsticks: React.FC = () => {
         updateSwitchHand={updateSwitchHand}
         playerid={numericId}
       />
+      <div className="layout3">
+        <Typography variant="h4">How to Play</Typography>
+        <Typography variant="body1" sx={{ marginTop: "20px" }}>
+          Objective of the game is to keep your hands and make the opponent lose
+          theirs. For a given turn, you can hit an opponents hand with yours to
+          increase the value of their hand by the value of your own hand. A hand
+          disappears if the value goes over 5. Another option during a turn is
+          to switch the value of your hands based on the buttons to the right of
+          the hand.
+        </Typography>
+      </div>
     </div>
   );
 };

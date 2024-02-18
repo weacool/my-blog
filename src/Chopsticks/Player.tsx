@@ -1,5 +1,8 @@
 import Hand from "./Hand.tsx";
 import { useEffect } from "react";
+import Typography from "@mui/material/Typography";
+import List from "@mui/material/List";
+import Button from "@mui/material/Button";
 
 const Player: React.FC<PlayerProps> = ({
   stateholder,
@@ -75,15 +78,22 @@ const Player: React.FC<PlayerProps> = ({
       {player.turn && player.player === playerid ? (
         <div>
           <div className="handturncontainer1">
-            <h1>My turn</h1>
-            <p>Pick your hand</p>
+            <Typography variant="h4" sx={{ marginTop: "20px" }}>
+              My turn
+            </Typography>
+            <Typography
+              variant="body1"
+              sx={{ marginTop: "20px", marginBottom: "10px" }}
+            >
+              Pick your Hand
+            </Typography>
             <div className="handbuttoncontainer">
               {showButton1() && (
                 <button
                   className={`round-button ${player.isButtonClicked1 ? "highlighted" : ""}`}
                   onClick={() => handleMyHandClick(1)}
                 >
-                  hand 1
+                  Hand 1
                 </button>
               )}
               {showButton2() && (
@@ -95,14 +105,19 @@ const Player: React.FC<PlayerProps> = ({
                 </button>
               )}
             </div>
-            <p>Target an Opponent's hand</p>
+            <Typography
+              variant="body1"
+              sx={{ marginTop: "25px", marginBottom: "10px" }}
+            >
+              Target an Opponent's hand
+            </Typography>
             <div className="handbuttoncontainer">
               {showButton3() && (
                 <button
                   className="round-button"
                   onClick={() => handleTargetHandClick(1)}
                 >
-                  Opponent's hand 1
+                  Opponent's Hand 1
                 </button>
               )}
               {showButton4() && (
@@ -110,7 +125,7 @@ const Player: React.FC<PlayerProps> = ({
                   className="round-button"
                   onClick={() => handleTargetHandClick(2)}
                 >
-                  Opponent's hand 2
+                  Opponent's Hand 2
                 </button>
               )}
             </div>
@@ -122,7 +137,9 @@ const Player: React.FC<PlayerProps> = ({
       {!player.turn && player.player === playerid && (
         <div>
           <div className="waiting-text">
-            Waiting for Other Player's turn ...
+            <Typography variant="body1">
+              Waiting for Other Player's turn ...
+            </Typography>
           </div>
         </div>
       )}
@@ -134,14 +151,17 @@ const Player: React.FC<PlayerProps> = ({
         {player.turn &&
           player.player === playerid &&
           player.switchCombo.map((buttonValues, index) => (
-            <li key={index}>
-              <button
-                //className="switchbutton"
-                onClick={() => handleSwitchClick(buttonValues)}
-              >
-                {buttonValues[0] + " , " + buttonValues[1]}
-              </button>
-            </li>
+            <List key={index}>
+              <div className="switchbutton">
+                <Button
+                  size="small"
+                  variant="contained"
+                  onClick={() => handleSwitchClick(buttonValues)}
+                >
+                  {buttonValues[0] + " , " + buttonValues[1]}
+                </Button>
+              </div>
+            </List>
           ))}
       </ul>
     </div>

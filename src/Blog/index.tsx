@@ -7,7 +7,7 @@ import Divider from "@mui/material/Divider";
 
 const BlogApp = () => {
   const [blogData, setState] = useState<blogData[]>([
-    { id: 0, title: "hi", content: "fgdsg" },
+    { id: 0, title: "", content: "" },
   ]);
 
   fetch("http://localhost:5000/api/blogs")
@@ -31,17 +31,22 @@ const BlogApp = () => {
 
   return (
     <div className="container">
-      <Typography variant="h2" sx={{ marginLeft: "250px" }}>
-        Blogs
+      <Typography variant="h4" sx={{ marginTop: "40px" }}>
+        Blog Posts
       </Typography>
       <ul>
         {blogData.map((blog) => (
           <List key={blog.id}>
-            <div className="item">
-              <h2>{blog.title}</h2>
-              <p>{blog.content}</p>
+            <div>
+              <Typography variant="body1">
+                <h2>{blog.title}</h2>
+                <p>{blog.content}</p>
+              </Typography>
               <Divider
-                sx={{ backgroundColor: "rgba(0, 0, 0, 0.5)", margin: "10px 0" }}
+                sx={{
+                  backgroundColor: "rgba(77, 119, 236, 0.6)",
+                  margin: "30px 0",
+                }}
               />
             </div>
           </List>
