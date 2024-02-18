@@ -1,7 +1,6 @@
 const { Server } = require("socket.io");
 const { createServer } = require("node:http");
 
-console.log("1");
 const initializeSocketServer = (app) => {
   const server = createServer(app);
   const io = new Server(server, {
@@ -10,7 +9,7 @@ const initializeSocketServer = (app) => {
       methods: ["GET", "POST"],
     },
   });
-  console.log("2");
+
   let stateholder = [
     {
       player: 1,
@@ -33,7 +32,7 @@ const initializeSocketServer = (app) => {
       switchCombo: [],
     },
   ];
-
+  console.log(stateholder);
   io.on("connection", (socket) => {
     console.log("a user connected");
 
