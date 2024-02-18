@@ -50,7 +50,6 @@ const Chopsticks: React.FC = () => {
     const socket = io(
       "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/",
       {
-        path: "/chopsticksocket",
         transports: ["websocket"],
       }
     );

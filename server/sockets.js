@@ -8,7 +8,6 @@ const initializeSocketServer = (app) => {
       origin: "http://localhost:5173",
       methods: ["GET", "POST"],
     },
-    path: "/chopsticksocket",
     transports: ["websocket"],
   });
 
