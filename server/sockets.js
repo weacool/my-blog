@@ -34,7 +34,7 @@ const initializeSocketServer = (app) => {
     },
   ];
   io.engine.on("connection_error", (err) => {
-    console.log(err.context);
+    console.log(err.message);
   });
   io.on("connection", (socket) => {
     console.log("a user connected");
