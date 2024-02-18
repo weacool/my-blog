@@ -9,6 +9,7 @@ const initializeSocketServer = (app) => {
       methods: ["GET", "POST"],
     },
     path: "/chopsticksocket",
+    transports: ["websocket", "polling"],
   });
 
   let stateholder = [
