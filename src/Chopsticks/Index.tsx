@@ -38,7 +38,9 @@ const Chopsticks: React.FC = () => {
 
   useEffect(() => {
     // Connect to the Socket.IO server
-    const socket = io("http://localhost:5000"); // Replace with your server URL
+    const socket = io(
+      "'http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com'"
+    ); // Replace with your server URL
     setSocket(socket);
     // Event handling
     socket.on("connect", () => {
