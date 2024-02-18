@@ -48,10 +48,7 @@ const Chopsticks: React.FC = () => {
 
     // Connect to the Socket.IO server
     const socket = io(
-      "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/",
-      {
-        transports: ["websocket"],
-      }
+      "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/"
     );
     setSocket(socket);
     // Event handling
