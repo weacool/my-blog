@@ -5,7 +5,7 @@ const initializeSocketServer = (app) => {
   const server = createServer(app);
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com",
       methods: ["GET", "POST"],
     },
   });
