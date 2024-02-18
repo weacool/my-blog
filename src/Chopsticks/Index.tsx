@@ -47,9 +47,7 @@ const Chopsticks: React.FC = () => {
       : "http://localhost:5001";
 
     // Connect to the Socket.IO server
-    const socket = io(
-      "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/"
-    );
+    const socket = io("ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/");
     setSocket(socket);
     // Event handling
     socket.on("connect", () => {
