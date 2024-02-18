@@ -3,7 +3,9 @@ const path = require("path");
 const cors = require("cors");
 const initializeSocketServer = require("./sockets.js");
 const app = express();
-const port = process.env.PORT || 5000;
+const isProduction = process.env.NODE_ENV === "production";
+
+const port = isProduction ? 5000 : 5001;
 const createBlogServer = require("./database.js");
 app.use(cors({ origin: "http://localhost:5173" }));
 createBlogServer(app);

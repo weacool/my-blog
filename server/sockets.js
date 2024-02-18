@@ -5,9 +5,10 @@ const initializeSocketServer = (app) => {
   const server = createServer(app);
   const io = new Server(server, {
     cors: {
-      origin: "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com",
+      origin: "http://localhost:5173",
       methods: ["GET", "POST"],
     },
+    path: "/chopsticksocket",
   });
 
   let stateholder = [
@@ -32,7 +33,7 @@ const initializeSocketServer = (app) => {
       switchCombo: [],
     },
   ];
-  console.log(stateholder);
+
   io.on("connection", (socket) => {
     console.log("a user connected");
 
