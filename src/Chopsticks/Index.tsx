@@ -48,7 +48,7 @@ const Chopsticks: React.FC = () => {
 
     // Connect to the Socket.IO server
     const socket = io(
-      "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com",
+      "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/",
       {
         path: "/chopsticksocket",
       }
