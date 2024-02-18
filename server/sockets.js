@@ -45,7 +45,6 @@ const initializeSocketServer = (app) => {
       stateholder = newState;
       // Broadcast the updated state to all connected clients
       io.emit("updateState", stateholder);
-      console.log(stateholder);
     });
   });
   return server;

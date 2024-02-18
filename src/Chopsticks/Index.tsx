@@ -38,15 +38,6 @@ const Chopsticks: React.FC = () => {
 
   useEffect(() => {
     // Connect to the Socket.IO server
-    // Set a condition (e.g., whether running in production or not)
-    //const isProduction = process.env.NODE_ENV === "production";
-
-    // Define the base URL
-    //const baseURL = isProduction
-    // ? "http://ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/"
-    // : "http://localhost:5001";
-
-    // Connect to the Socket.IO server
     const socket = io("ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/");
     setSocket(socket);
     // Event handling
