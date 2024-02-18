@@ -58,6 +58,10 @@ const Chopsticks: React.FC = () => {
     socket.on("connect", () => {
       console.log("Connected to server");
     });
+    socket.on("connect_error", (err) => {
+      // the reason of the error, for example "xhr poll error"
+      console.log(err.message);
+    });
 
     // Listen for 'updateState' event from the server
     socket.on("updateState", (updatedState) => {
