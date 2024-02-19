@@ -3,10 +3,10 @@ import Typography from "@mui/material/Typography";
 const HomePage = () => {
   return (
     <div className="container">
-      <Typography variant="h3" sx={{ marginTop: "120px" }}>
+      <Typography variant="h3" sx={{ marginTop: "170px" }}>
         About Me
       </Typography>
-      <Typography variant="body1" sx={{ marginTop: "70px", width: "650px" }}>
+      <Typography variant="body1" sx={{ marginTop: "80px", width: "650px" }}>
         I've created this website as a hobby and also a place where I can
         practice some of the real world skills in full stack development. From
         the front end all the way to deployment. I graduated university in a
