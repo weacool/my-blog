@@ -10,7 +10,7 @@ const BlogApp = () => {
     { id: 0, title: "", content: "" },
   ]);
 
-  fetch("http://localhost:5000/api/blogs")
+  fetch("http://localhost:5001/api/blogs")
     .then((response) => {
       // Check if the request was successful (status code 200-299)
       if (!response.ok) {

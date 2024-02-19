@@ -40,9 +40,7 @@ const Chopsticks: React.FC = () => {
     const isProduction = process.env.NODE_ENV === "production";
 
     // Define the base URL
-    const baseURL = isProduction
-      ? "ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/"
-      : "http://localhost:5001";
+    const baseURL = isProduction ? "chrispy.cz" : "http://localhost:5001";
     // Connect to the Socket.IO server
     const socket = io(baseURL);
     setSocket(socket);
