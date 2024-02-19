@@ -9,9 +9,7 @@ const port = isProduction ? 5000 : 5001;
 const createBlogServer = require("./database.js");
 
 // Define the base URL
-const baseURL = isProduction
-  ? "ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/"
-  : "http://localhost:5173";
+const baseURL = isProduction ? "http://chrispy.cz" : "http://localhost:5173";
 
 app.use(cors({ origin: baseURL }));
 createBlogServer(app);
