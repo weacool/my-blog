@@ -24,7 +24,7 @@ app.get("*", (req, res) => {
 });
 
 // Initialize the socket server passing the app to it
-const server = initializeSocketServer(app);
+const server = initializeSocketServer(app, baseURL);
 
 // Start the server
 server.listen(port, () => {

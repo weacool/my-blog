@@ -1,11 +1,11 @@
 const { Server } = require("socket.io");
 const { createServer } = require("node:http");
 
-const initializeSocketServer = (app) => {
+const initializeSocketServer = (app, baseURL) => {
   const server = createServer(app);
   const io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173",
+      origin: baseURL,
       methods: ["GET", "POST"],
     },
   });
