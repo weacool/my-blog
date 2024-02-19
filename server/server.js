@@ -7,7 +7,13 @@ const isProduction = process.env.NODE_ENV === "production";
 
 const port = isProduction ? 5000 : 5001;
 const createBlogServer = require("./database.js");
-app.use(cors({ origin: "http://localhost:5173" }));
+
+// Define the base URL
+const baseURL = isProduction
+  ? "ec2-3-26-41-98.ap-southeast-2.compute.amazonaws.com/"
+  : "http://localhost:5173";
+
+app.use(cors({ origin: baseURL }));
 createBlogServer(app);
 
 app.use(express.static(path.join(__dirname, "../dist")));
