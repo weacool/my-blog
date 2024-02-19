@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview",
-    "start-server": "nodemon server/server.js",
+    "start-server": "node server/server.js",
     "start-dev": "concurrently \"npm run dev\" \"npm run start-server\"",
     "start-prod": "NODE_ENV=production concurrently \"npm run dev\" \"npm run start-server\""
   },
