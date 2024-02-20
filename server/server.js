@@ -10,7 +10,7 @@ const createBlogServer = require("./database.js");
 
 // Define the base URL
 const baseURL = isProduction ? "chrispy.cz" : "http://localhost:5173";
-
+console.log(baseURL);
 app.use(cors({ origin: baseURL }));
 createBlogServer(app);
 
