@@ -1,33 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./interface.tsx";
 import "./index.css";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import Divider from "@mui/material/Divider";
+import supabase from "./supabase.tsx";
 
 const BlogApp = () => {
   const [blogData, setState] = useState<blogData[]>([
     { id: 0, title: "", content: "" },
   ]);
 
-  fetch("http://localhost:5001/api/blogs")
-    .then((response) => {
-      // Check if the request was successful (status code 200-299)
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
+  useEffect(() => {
+    const fetchData = async () => {
+      const { data, error } = await supabase.from("blog").select("*");
 
-      // Parse the response body as JSON
-      return response.json();
-    })
-    .then((data) => {
-      // Handle the data
+      if (error) {
+        console.error("Error fetching data:", error.message);
+        return;
+      }
+      console.log(data);
       setState(data);
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error("Fetch error:", error);
-    });
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="container">
@@ -38,7 +34,7 @@ const BlogApp = () => {
         {blogData.map((blog) => (
           <List key={blog.id}>
             <div>
-              <Typography variant="body1">
+              <Typography component="div" variant="body1">
                 <h2>{blog.title}</h2>
                 <p>{blog.content}</p>
               </Typography>

@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route index element={<HomePage />} />
           <Route path="blog" element={<Blog />} />
-          <Route path="portfolio/" element={<Portfolio />} />
+          <Route path="portfolio//*" element={<Portfolio />} />
           <Route path="portfolio/chopsticks/:id" element={<Chopsticks />} />
         </Routes>
       </BrowserRouter>
