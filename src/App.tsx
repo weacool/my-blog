@@ -5,8 +5,18 @@ import HomePage from "./HomePage.tsx";
 import Portfolio from "./Portfolio.tsx";
 import Dashboard from "./Dashboard.tsx";
 import Chopsticks from "./Chopsticks/Index.tsx";
+import { useEffect } from "react";
 
-function App() {
+const App = () => {
+  useEffect(() => {
+    // Set the title dynamically
+    document.title = "Chrispy";
+    const favicon = document.createElement("link");
+    favicon.rel = "icon";
+    favicon.href = "./favicon.jpg"; // Adjust the path to your favicon file
+    document.head.appendChild(favicon);
+  }, []);
+
   return (
     <div className="container">
       <BrowserRouter>
@@ -20,8 +30,6 @@ function App() {
       </BrowserRouter>
     </div>
   );
-}
-
-//function
+};
 
 export default App;

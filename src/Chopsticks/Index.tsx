@@ -159,7 +159,7 @@ const Chopsticks: React.FC = () => {
             return {
               ...playerState,
               hand1:
-                playerState.hand1 + tempHand1! > 5
+                playerState.hand1 + tempHand1! > 4
                   ? 0
                   : playerState.hand1 + tempHand1!,
               turn: true,
@@ -168,7 +168,7 @@ const Chopsticks: React.FC = () => {
             return {
               ...playerState,
               hand2:
-                playerState.hand2 + tempHand1! > 5
+                playerState.hand2 + tempHand1! > 4
                   ? 0
                   : playerState.hand2 + tempHand1!,
               turn: true,
@@ -282,7 +282,7 @@ const Chopsticks: React.FC = () => {
           Objective of the game is to keep your hands and make the opponent lose
           theirs. For a given turn, you can hit an opponents hand with yours to
           increase the value of their hand by the value of your own hand. A hand
-          disappears if the value goes over 5. Another option during a turn is
+          disappears if the value goes over 4. Another option during a turn is
           to switch the value of your hands based on the buttons to the right of
           the hand.
         </Typography>
