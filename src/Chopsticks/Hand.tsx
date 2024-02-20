@@ -4,7 +4,6 @@ const Hand: React.FC<{ handProp: number }> = ({ handProp }) => {
     2: "/finger2.png",
     3: "/finger3.png",
     4: "/finger4.png",
-    5: "/finger5.png",
   };
 
   return (
