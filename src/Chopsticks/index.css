@@ -51,7 +51,7 @@
 .switchbutton {
   width: 50px;
   margin-right: -300px;
-  margin-left: 175px;
+  margin-left: 100px;
 }
 
 .round-button {
@@ -84,7 +84,7 @@
 
 .reset-button {
   position: relative;
-  right: 600px;
+  right: 400px;
   width: 100px;
 }
 
@@ -103,7 +103,7 @@
 
 .layout3 {
   position: absolute;
-  right: 4%;
+  right: 3%;
   top: 25%;
   display: flex;
   align-items: center;
