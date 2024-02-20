@@ -34,7 +34,11 @@ const BlogApp = () => {
         {blogData.map((blog) => (
           <List key={blog.id}>
             <div>
-              <Typography component="div" variant="body1">
+              <Typography
+                component="div"
+                variant="body1"
+                sx={{ width: "650px" }}
+              >
                 <h2>{blog.title}</h2>
                 <p>{blog.content}</p>
               </Typography>
