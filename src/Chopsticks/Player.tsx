@@ -25,8 +25,8 @@ const Player: React.FC<PlayerProps> = ({
   const switchArr = () => {
     const combinations: [number, number][] = [];
     let total = player.hand1 + player.hand2;
-    for (let i = 1; i <= 4; i++) {
-      for (let j = 1; j <= 4; j++) {
+    for (let i = 0; i <= 4; i++) {
+      for (let j = 0; j <= 4; j++) {
         if (i !== player.hand1 && i + j === total && j !== player.hand2) {
           combinations.push([i, j]);
         }
