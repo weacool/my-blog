@@ -22,6 +22,13 @@ const Player: React.FC<PlayerProps> = ({
     }
   }, [player.turn]); // Only run the effect when 'turn' changes in the first item
 
+  useEffect(() => {
+    if (player.turn === true) {
+      let switchArray = switchArr();
+      switchUpdate(switchArray, player.player);
+    }
+  }, []);
+
   const switchArr = () => {
     const combinations: [number, number][] = [];
     let total = player.hand1 + player.hand2;
